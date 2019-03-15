@@ -1,24 +1,24 @@
 'strict mode';
 
 const Blockchain = require('./lib/blockchain').Blockchain;
-const NROUNDS = 13;
+const NROUNDS = 10;
 
 let bc = new Blockchain(NROUNDS);
 
 let firstData = {id: Math.floor(1000.0 * Math.random()), text: 'I think therefore I am'};
-bc.generateNewBlock(null, firstData).then(firstBlock => {
-  console.log(firstBlock);
-  return bc.addGenesisBlock(firstBlock).then(status => {
-    console.log(`addGenesisBlock: ${status}`);
+
+(async () => {
+  try {
+    let firstBlock = await bc.generateNewBlock(null, firstData);
+    console.log(firstBlock);
+    let status = await bc.addGenesisBlock(firstBlock);
     let newData = {id: Math.floor(1000.0 * Math.random()), text: 'Cogito Ergo Sum'};
-    return bc.generateNewBlock(firstBlock.hash, newData);
-  }).then(newBlock => {
+    let newBlock = await bc.generateNewBlock(firstBlock.hash, newData);
     console.log(newBlock);
-    return bc.addNewBlock(newBlock).then(status => {
-      console.log(`addNewBlock: ${status}`);
-      return status;
-    });
-  });
-}).catch(err => {
-  console.log(`Error: ${err.message}`);
-});
+    status = await bc.addNewBlock(newBlock);
+    console.log(`addNewBlock: ${status}`);
+  } catch (err) {
+    console.log(`Error: ${err.message}`);
+  }
+})();
+
