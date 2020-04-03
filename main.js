@@ -1,7 +1,7 @@
 'strict mode';
 
 const Blockchain = require('./lib/blockchain').Blockchain;
-const NROUNDS = 10;
+const NROUNDS = 17; // (Generate+Validate) 16 => 10 s, 17 => 20 s, 18 => 40 s, 19 => 80 s
 
 let bc = new Blockchain(NROUNDS);
 
@@ -21,4 +21,3 @@ let firstData = {id: Math.floor(1000.0 * Math.random()), text: 'I think therefor
     console.log(`Error: ${err.message}`);
   }
 })();
-
