@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "A simple blockchain",
   "main": "main.js",
+  "engines": {
+    "node": ">=10.15.3"
+  },
   "scripts": {
     "start": "node main.js",
     "test": "echo No Tests"
@@ -21,6 +24,6 @@
   },
   "homepage": "https://github.com/ccapo/simple-blockchain-node#readme",
   "dependencies": {
-    "bcrypt": "^1.0.3"
+    "bcrypt": "4.0.1"
   }
 }
